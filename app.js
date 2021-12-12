@@ -7,7 +7,8 @@ const connectToDb = require("./configs/db.config")
 const app = express()
 
 const categoryRouter = require("./routes/categories.routes")
-
+const productRouter = require("./routes/products.routes")
+const storeRouter = require("./routes/stores.routes")
 
 app.use(express.json())
 app.use(cors(
@@ -15,7 +16,8 @@ app.use(cors(
 ))
 
 app.use("/category", categoryRouter)
-
+app.use("/product", productRouter)
+app.use("/store", storeRouter)
 
 
 connectToDb

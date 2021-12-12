@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-const { stringify } = require("nodemon/lib/utils")
 
 const categorySchema = mongoose.Schema({
     name: {
@@ -12,7 +11,7 @@ const categorySchema = mongoose.Schema({
         type: String,
         trim: true
     },
-    imgLogo: {
+    img: {
         type: String,
         default: "https://images2.alphacoders.com/862/thumb-1920-862737.png"
     },
@@ -25,7 +24,12 @@ const categorySchema = mongoose.Schema({
     }],
     stores: [{
         type: mongoose.Schema.Types.ObjectId, ref: "Store"
-    }]
+    }],
+    available: {
+        type:Boolean,
+        default: true,
+        required: true
+    }
 })
 
 const categoryModel = mongoose.model("Category", categorySchema)

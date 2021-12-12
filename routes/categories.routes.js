@@ -1,4 +1,3 @@
-const mongoose = require("mongoose")
 const express = require("express")
 const Category = require("../models/Category.model")
 
@@ -18,6 +17,16 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
     try {
         const categories = await Category.find({})
+        res.status(200).json(categories)
+    }
+    catch(error) {
+        res.status(400).json(error)
+    }
+})
+
+router.get("/:_id", async (req, res) => {
+    try {
+        const categories = await Category.find({_id: req.params._id}).populate("products")
         res.status(200).json(categories)
     }
     catch(error) {

@@ -1,1 +1,2 @@
--> Protect categorie routes
+-> Protect categorie(post/patch) routes
+-> Protect product(post) routes
