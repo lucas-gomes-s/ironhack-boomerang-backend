@@ -71,15 +71,12 @@ router.get("/:_id", async (req, res) => {
 })
 
 router.post("/freight", async(req,res) => {
-    console.log(`https://maps.googleapis.com/maps/api/directions/json?origin=${req.body.origin}&destination=${req.body.destination}&key=${process.env.GOOGLE_API_KEY}`)
-    console.log(req.body)
     axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${req.body.origin}&destination=${req.body.destination}&key=${process.env.GOOGLE_API_KEY}`)
     .then (response => 
-        res.status(200).json(response)
+        res.status(200).json(response.data)
     )
     .catch (error => {
-        console.log(error)
-        res.status(400).json(error.message)
+        res.status(400).json(error)
     }
     )
 })
