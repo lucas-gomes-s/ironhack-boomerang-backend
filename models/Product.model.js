@@ -24,20 +24,35 @@ const productSchema = mongoose.Schema({
         type: String,
         default: "https://images2.alphacoders.com/862/thumb-1920-862737.png"
     },
-    minPrice: {
-        type: Number,
-        default: 0,
-        required: true
-    },
-    maxPrice: {
-        type: Number
+    secondaryImgs: {
+        type: String,
     },
     variants: [{
-        type: Object
+        type: mongoose.Schema.Types.ObjectId, ref: "Variant",
     }],
-    available: {
+    //variantTypes: [{
+      //  type: Object
+    //}],
+    pricingType: {
+        type: String,
+        enum: ["daily", "period"],
+        default: "daily",
+        required: true
+    },
+    pricing: [{
+        Type: mongoose.Schema.Types.Mixed,
+    }],
+    active: {
         type:Boolean,
         default: true,
+        required: true
+    },
+    unavailable: [{
+        type: Date
+    }],
+    signature: {
+        type: Boolean,
+        default: false,
         required: true
     }
 })
