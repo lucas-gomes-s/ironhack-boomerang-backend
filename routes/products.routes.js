@@ -13,11 +13,10 @@ router.post("/", async (req,res) =>{
         for (let i=0; i<newProduct.categories.length; i++) {
             const category = await Category.findOneAndUpdate({_id: newProduct.categories[i]}, {$push: {products: newProduct._id}})
         };       
-        for (let i=0; i<newProduct.categories.length; i++) {
+        for (let i=0; i<newProduct.stores.length; i++) {
             const store = await Store.findOneAndUpdate({_id: newProduct.stores[i]}, {$push: {products: newProduct._id}})
         };              
         res.status(201).json(newProduct)
-        // Has to also update store and category
     }
     catch(error){
         res.status(400).json(error)
@@ -79,6 +78,16 @@ router.post("/freight", async(req,res) => {
         res.status(400).json(error)
     }
     )
+})
+
+router.get("/", async (req, res) => {
+    try{
+        const product = await Product.find({})
+        res.status(200).json(product)
+    }
+    catch(error){
+        res.status(400).json(error)
+    }
 })
 
 module.exports = router

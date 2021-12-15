@@ -39,9 +39,8 @@ const productSchema = mongoose.Schema({
         default: "daily",
         required: true
     },
-    pricing: [{
-        Type: mongoose.Schema.Types.Mixed,
-    }],
+    pricing: {
+    },
     active: {
         type:Boolean,
         default: true,
