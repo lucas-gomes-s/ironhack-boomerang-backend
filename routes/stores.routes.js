@@ -34,7 +34,19 @@ router.delete("/:id", async (req,res) =>{
 
 router.get("/", async (req,res) =>{
     try{
-        const stores = await Store.find({})
+        const stores = await Store.find({}).populate("products")
+        res.status(200).json(stores)
+    }
+    catch(error){
+        res.status(400).json(error)
+    }
+})
+
+module.exports = router
+
+router.get("/:id", async (req,res) =>{
+    try{
+        const stores = await Store.findOne({_id: req.params.id}).populate("products")
         res.status(200).json(stores)
     }
     catch(error){
