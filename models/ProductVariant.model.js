@@ -2,9 +2,10 @@ const mongoose = require("mongoose")
 
 const productVariantSchema = mongoose.Schema({
     product: {
-        type: mongoose.Schema.Types.ObjectId, ref: "Product"
+        type: mongoose.Schema.Types.ObjectId, ref: "Product",
+        required: true
     },
-    variant: {
+    specification: {
         type: Object,
         required: true
     },
@@ -22,8 +23,17 @@ const productVariantSchema = mongoose.Schema({
 
     unavailable: [{
         type: Date
-    }]
-})
+    }], 
+
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Order" 
+    }],
+    dailyOrders: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true,
+        default: {}
+    }
+}, {minimize: false})
 
 const productVariantModel = mongoose.model("Variant", productVariantSchema)
 

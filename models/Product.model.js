@@ -24,15 +24,12 @@ const productSchema = mongoose.Schema({
         type: String,
         default: "https://images2.alphacoders.com/862/thumb-1920-862737.png"
     },
-    secondaryImgs: {
+    secondaryImgs: [{
         type: String,
-    },
+    }],
     variants: [{
         type: mongoose.Schema.Types.ObjectId, ref: "Variant",
     }],
-    //variantTypes: [{
-      //  type: Object
-    //}],
     pricingType: {
         type: String,
         enum: ["daily", "period"],
@@ -48,6 +45,9 @@ const productSchema = mongoose.Schema({
     },
     unavailable: [{
         type: Date
+    }],
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Order" 
     }],
     signature: {
         type: Boolean,

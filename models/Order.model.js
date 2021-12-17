@@ -23,9 +23,18 @@ const orderSchema = mongoose.Schema({
         default: 0
     },
     items: [{
-        product: {
-            type: mongoose.Schema.Types.ObjectId, ref: "Product",
-            variant: mongoose.Schema.Types.ObjectId, ref: "Variant",
+            product: {
+                type: mongoose.Schema.Types.ObjectId, ref: "Product",
+                required: true
+            },
+            variant: {
+                type: mongoose.Schema.Types.ObjectId, ref: "Variant",
+                required: true
+            },
+            store:{
+                type: mongoose.Schema.Types.ObjectId, ref: "Store",
+                required: true
+            },
             startDate: {
                 type: Date,
                 required: true
@@ -33,16 +42,21 @@ const orderSchema = mongoose.Schema({
             endDate: {
                 type: Date
             }
-        }
     }],
     signature: {
         type: Boolean,
         default: false,
         required: true
+    },
+    status: {
+        type: String,
+        enum: ["created", "accepted", "ready for delivery", "delivered", "finished", "cancelled"],
+        required: true,
+        default: "created"
     }
 }, 
 {timestamps: true})
 
-const orderModel = mongoose.model("Order", orderModel)
+const orderModel = mongoose.model("Order", orderSchema)
 
 module.exports = orderModel

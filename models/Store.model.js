@@ -25,7 +25,7 @@ const storeSchema = mongoose.Schema({
         required: true
     },
     zipCode: {
-        type: Number,
+        type: String,
         required: true
     },
     offDays: [{
@@ -36,7 +36,10 @@ const storeSchema = mongoose.Schema({
         type:Boolean,
         default: true,
         required: true
-    }
+    },
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Order" 
+    }]
 })
 
 const storeModel = mongoose.model("Store", storeSchema)

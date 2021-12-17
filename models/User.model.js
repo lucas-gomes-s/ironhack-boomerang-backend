@@ -43,12 +43,12 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: "Order"
     }],
 
-    role: [{
+    role: {
         type: String,
         enum: ["client", "admin", "partner"],
         default: "client",
         required: true
-    }]
+    }
 })
 
 const userModel = mongoose.model("User", userSchema)

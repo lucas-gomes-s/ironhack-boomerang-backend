@@ -71,9 +71,15 @@ router.get("/:_id", async (req, res) => {
 
 router.post("/freight", async(req,res) => {
     axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${req.body.origin}&destination=${req.body.destination}&key=${process.env.GOOGLE_API_KEY}`)
-    .then (response => 
-        res.status(200).json(response.data)
-    )
+    .then (response => {
+        if (response.data.routes.length>0) {
+            res.status(200).json(response.data)
+        }
+        else {
+            res.status(404).json("No routes found")
+        }
+        
+    })
     .catch (error => {
         res.status(400).json(error)
     }
