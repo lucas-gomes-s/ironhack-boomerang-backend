@@ -26,7 +26,6 @@ router.post("/pix", (req,res) => {
 router.post("/freight", async(req,res) => {
     axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${req.body.origin}&destination=${req.body.destination}&key=${process.env.GOOGLE_API_KEY}`)
     .then (response => {
-        console.log("Then just started")
         if (response.data.routes.length>0) {
             let distance = response.data.routes[0].legs[0].distance.value
             let value = 0
@@ -34,9 +33,8 @@ router.post("/freight", async(req,res) => {
                 value = freightPrice.basePrice
             }
             else {
-                value = freightPrice.basePrice+(distance-freightPrice.base)*freightPrice.variablePrice
+                value = freightPrice.basePrice+(distance-freightPrice.base)/1000*freightPrice.variablePrice
             }
-            console.log(value)
             return res.status(200).json({data: value})
         }
 
