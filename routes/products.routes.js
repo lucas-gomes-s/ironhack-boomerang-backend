@@ -76,7 +76,7 @@ router.post("/freight", async(req,res) => {
             res.status(200).json(response.data)
         }
         else {
-            res.status(404).json("No routes found")
+            res.status(404).json({data: "No routes found"})
         }
         
     })
