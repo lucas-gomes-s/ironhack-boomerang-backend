@@ -35,11 +35,10 @@ router.post("/freight", async(req,res) => {
             else {
                 value = freightPrice.basePrice+(distance-freightPrice.base)/1000*freightPrice.variablePrice
             }
-            return res.status(200).json({data: value})
+            return res.status(200).json({value})
         }
 
         else {
-            console.log("Apparently, there is an error")
             return res.status(404).json({})
         }
 

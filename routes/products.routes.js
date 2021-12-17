@@ -3,7 +3,6 @@ const Product = require("../models/Product.model");
 const Category = require("../models/Category.model");
 const Store = require("../models/Store.model")
 const Variant = require("../models/ProductVariant.model");
-const axios = require ("axios");
 
 const router = express.Router();
 
