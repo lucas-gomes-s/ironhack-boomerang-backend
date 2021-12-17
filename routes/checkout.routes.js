@@ -1,5 +1,9 @@
 const express = require("express")
+const axios = require ("axios");
+
 var mercadopago = require('mercadopago');
+
+
 mercadopago.configurations.setAccessToken(process.env.MERCADO_PAGO_TOKEN)
 
 const router = express.Router()
