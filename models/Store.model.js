@@ -12,7 +12,7 @@ const storeSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: "Category"
     }],
     products: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "Store",
+        type: mongoose.Schema.Types.ObjectId, ref: "Product",
         
     }],
     img: {
