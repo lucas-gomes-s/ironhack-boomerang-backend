@@ -31,12 +31,11 @@ router.post("/freight", async(req,res) => {
             else {
                 value = freightPrice.basePrice+(distance-freightPrice.base)*freightPrice.variablePrice
             }
-            res.status(200).json({data: value})
+            res.status(200).json({value})
         }
         else {
-            res.status(404).json({data: "No routes found"})
+            res.status(404).json({})
         }
-        
     })
     .catch (error => {
         res.status(400).json(error)
