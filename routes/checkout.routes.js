@@ -22,6 +22,7 @@ router.post("/pix", (req,res) => {
 router.post("/freight", async(req,res) => {
     axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${req.body.origin}&destination=${req.body.destination}&key=${process.env.GOOGLE_API_KEY}`)
     .then (response => {
+        console.log("Then just started")
         if (response.data.routes.length>0) {
             let distance = response.data.routes[0].legs[0].distance.value
             let value = 0
@@ -31,14 +32,20 @@ router.post("/freight", async(req,res) => {
             else {
                 value = freightPrice.basePrice+(distance-freightPrice.base)*freightPrice.variablePrice
             }
-            res.status(200).json({value})
+            console.log(value)
+            return res.status(200).json({data: value})
         }
+
         else {
-            res.status(404).json({})
+            console.log("Apparently, there is an error")
+            return res.status(404).json({})
         }
+
+        res.status(200).json(response.data)
     })
     .catch (error => {
-        res.status(400).json(error)
+        console.log("This is the catch block")
+        return res.status(400).json(error)
     }
     )
 })
